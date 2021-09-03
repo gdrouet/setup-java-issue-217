@@ -6,6 +6,8 @@ defaults:
 jobs:
   run-test:
     runs-on: [ubuntu-latest]
+    env:
+      MAVEN_CLI_OPTS: "--batch-mode -s settings.xml"
     steps:
       - uses: actions/checkout@v2
       - name: Setup java 11
@@ -15,4 +17,4 @@ jobs:
           java-version: '11'
           check-latest: true
           cache: 'maven'
-      - run: mvn clean package
+      - run: mvn ${{ env.MAVEN_CLI_OPTS }} clean package
